@@ -3,6 +3,7 @@ import * as firebase from 'firebase'
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const GET_FIELDS = 'GET_FIELDS';
 
+//configuration for firebase
 var config = {
     apiKey: "AIzaSyC3dfwbLKimfRTKL0qJP2mzW2EFs7b-PBc",
     authDomain: "almabase-3740a.firebaseapp.com",
@@ -14,10 +15,10 @@ var config = {
 firebase.initializeApp(config)
 
 const db = firebase.database()
-const SRef = db.ref().child('sections')
-const FRef = db.ref().child('fields')
+const SRef = db.ref().child('sections')//refrence to sections in database
+const FRef = db.ref().child('fields')//refrence to fields in database
 
-
+//function for adding section
 export function addSection(name,section,position,sortedSectionKeys){
 
   return function(dispatch){
@@ -32,7 +33,7 @@ export function addSection(name,section,position,sortedSectionKeys){
     })
   }
 }
-
+//function to set new position value of section after adding new section
 export function setNewPosition(sortedSectionKeys,index){
   return function(dispatch){
     sortedSectionKeys.forEach((key,i)=>{
@@ -42,7 +43,7 @@ export function setNewPosition(sortedSectionKeys,index){
     })
   }
 }
-
+//adding new field
 export function addField(sectionKey, name){
   return function(dispatch){
     const fieldkey = FRef.push().key
@@ -54,6 +55,7 @@ export function addField(sectionKey, name){
   }
 }
 
+//edit existing section
 export function editSection(sid, name,section,position,sortedSectionKeys){
   return function(dispatch){
     let newPosition
@@ -82,7 +84,7 @@ export function editSection(sid, name,section,position,sortedSectionKeys){
       })
   }
 }
-
+//set position value after deletion
 export function newPositionAfterDeletion(sortedSectionKeys){
   return function(dispatch){
     sortedSectionKeys.forEach((keys,i)=>{
@@ -91,6 +93,7 @@ export function newPositionAfterDeletion(sortedSectionKeys){
   }
 }
 
+//retrieves the sections
 export function getSections(){
   return function(dispatch){
     SRef.orderByChild('position').on('value',snap=>{
@@ -102,6 +105,7 @@ export function getSections(){
   }
 }
 
+//retrieves the fields
 export function getFields(){
   return function(dispatch){
     FRef.on('value',snap=>{
@@ -113,6 +117,7 @@ export function getFields(){
   }
 }
 
+//deletion of the sections
 export function removeSection(sid,sortedSectionKeys){
   return function(dispatch){
     SRef.child(sid).once('value').then((snap=>{
@@ -131,6 +136,7 @@ export function removeSection(sid,sortedSectionKeys){
   }
 }
 
+//sets new position value after deletion of section
 export function positionAfterDeletion(position,sortedSectionKeys){
   return function(dispatch){
     sortedSectionKeys.forEach((keys,i)=>{
@@ -141,6 +147,7 @@ export function positionAfterDeletion(position,sortedSectionKeys){
   }
 }
 
+//remove the fields
 export function removeField(sid,fid){
   return function(dispatch){
     console.log(sid+'/'+fid)
