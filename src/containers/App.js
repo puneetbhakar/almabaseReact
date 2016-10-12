@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import '../App.css';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as Actions from '../actions';
+import React, { Component } from 'react'
+import '../App.css'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as Actions from '../actions'
 import SectionList from '../components/SectionList'
 import AddSectionModal from '../components/AddSectionModal'
 import EditSectionModal from '../components/EditSectionModal'
 import AddFieldModal from '../components/AddFieldModal'
 import DeleteSectionModal from '../components/DeleteSectionModal'
-import {Grid, Row, Col, Button} from 'react-bootstrap';
+import {Grid, Row, Col, Button} from 'react-bootstrap'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 class App extends Component {
 
@@ -91,16 +93,21 @@ class App extends Component {
 
   sortingSectionList(){
     const section = this.props.sections
-    const sectionKey =  Object.keys(section)
-    let sortedSectionKey = []
-    let sortedList = {}
-    sectionKey.forEach((key)=>{
-      sortedSectionKey[(section[key].position)-1] = key
-    })
-    sortedSectionKey.forEach((key)=>{
-      sortedList[key] = section[key]
-    })
-    return sortedList
+    console.log(section)
+    if(section!==[] && section!==null){
+      const sectionKey =  Object.keys(section)
+      let sortedSectionKey = []
+      let sortedList = {}
+      sectionKey.forEach((key)=>{
+        sortedSectionKey[(section[key].position)-1] = key
+      })
+      sortedSectionKey.forEach((key)=>{
+        sortedList[key] = section[key]
+      })
+      return sortedList
+    }else{
+      return {}
+    }
   }
 
   handleFieldDelete(sectionKey,fieldKey){
@@ -183,4 +190,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps )(App);
+export default connect(mapStateToProps, mapDispatchToProps )(DragDropContext(HTML5Backend)(App));

@@ -20,17 +20,25 @@ const FRef = db.ref().child('fields')//refrence to fields in database
 
 //function for adding section
 export function addSection(name,section,position,sortedSectionKeys){
-
   return function(dispatch){
+    console.log(section)
     let newPosition = parseInt(section)+parseInt(position)
-    if (newPosition <= sortedSectionKeys.length){
-      dispatch(setNewPosition(sortedSectionKeys,newPosition))
+    if(section){
+      if (newPosition <= sortedSectionKeys.length){
+        dispatch(setNewPosition(sortedSectionKeys,newPosition))
+      }
+      console.log(newPosition)
+      SRef.push({
+        title: name,
+        position: newPosition
+      })
     }
-    console.log(parseInt(section)+parseInt(position))
-    SRef.push({
-      title: name,
-      position: newPosition
-    })
+    else{
+      SRef.push({
+        title: name,
+        position: 1
+      })
+    }
   }
 }
 //function to set new position value of section after adding new section
