@@ -32,16 +32,15 @@
 }
 
 .sectionHeader{
-  height: 36px;
   min-height: 36px;
   box-shadow: 0 -1px 0 rgba(0,0,0,0.12) inset;
   background: #f5f5f5;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  overflow: auto;
 }
 
 .sectionFields{
-  height: 100px;
   min-height: 100px;
   padding: 10px;
 }
@@ -65,7 +64,6 @@
 .fieldItem{
   border: 1px solid #b2b0b0;
   width: 150px;
-  float: left;
   height: 30px;
   margin-left: 15px;
   margin-top: 10px;
@@ -73,6 +71,7 @@
   background-color: #846AD5;
   color: #f3eff7;
   font-weight: 600;
+  display: inline-block;
 }
 
 .fieldText{
@@ -90,10 +89,12 @@
 
 .noFields{
   background-color: transparent;
-    color: #c4c0c0;
-    border: 0px;
-    margin-left: 300px;
-    margin-top: 20px;
+  color: #c4c0c0;
+  border: 0px;
+  margin-left: 300px;
+  margin-top: 20px;
+  display: block;
+  margin: auto;
 }
 
 .addField{
