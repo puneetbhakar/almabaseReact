@@ -1,6 +1,7 @@
 import React from 'react'
 import FieldList from './FieldList'
 
+
 const SectionItem = (props)=>{
   return (
     <div className="section">
@@ -23,4 +24,4 @@ const SectionItem = (props)=>{
   )
 }
 
-export default SectionItem
+export default (SectionItem)

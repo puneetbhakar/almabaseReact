@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../actions'
 import SectionList from '../components/SectionList'
+import Random from '../components/Random'
 import AddSectionModal from '../components/AddSectionModal'
 import EditSectionModal from '../components/EditSectionModal'
 import AddFieldModal from '../components/AddFieldModal'
@@ -11,6 +12,7 @@ import DeleteSectionModal from '../components/DeleteSectionModal'
 import {Grid, Row, Col, Button} from 'react-bootstrap'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
+
 
 class App extends Component {
 
@@ -135,6 +137,7 @@ class App extends Component {
             <div className="pull-left" style={{fontSize:'15px',paddingTop:'15px',fontWeight:'bold'}}>Profile View</div>
             <Button className="pull-right addSectionButton" onClick={()=>this.openAddSection()}>ADD NEW SECTION</Button>
             </div>
+            <Random/>
             <AddSectionModal
               pop={this.state.showAddSectionModal}
               notpop={()=>this.closeAddSection()}
@@ -167,6 +170,7 @@ class App extends Component {
               handleFieldDelete={(sectionKey,fieldKey)=>{this.handleFieldDelete(sectionKey,fieldKey)}}
               section={sortedSection}
               fields={fields}
+              axis={'x'}
               />
           </Col>
         </Row>
@@ -190,4 +194,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps )(DragDropContext(HTML5Backend)(App));
+export default connect(mapStateToProps, mapDispatchToProps ) (DragDropContext(HTML5Backend)(App));
